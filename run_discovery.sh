@@ -76,7 +76,6 @@ while true; do
 
   # Convert repos to array
   arr=(${repos[@]})
-  echo "" > /tmp/discovered_repositories.tmp
 
   # Iterate over arr by 2 (since each pair of entries is a repo name and its visibility)
   for ((i=0; i<${#arr[@]}; i+=2)); do
