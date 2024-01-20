@@ -75,6 +75,25 @@ while true; do
   sleep 6
   done
 
-  # Print the array of repositories
-  echo "--- echoing repos array ---"
-  echo "${repos[@]}"
+  # Convert repos to array
+  arr=(${repos[@]})
+  echo "" > /tmp/discovered_repositories.tmp
+
+  # Iterate over arr by 2 (since each pair of entries is a repo name and its visibility)
+  for ((i=0; i<${#arr[@]}; i+=2)); do
+    visibility="Public"
+    if [ "${arr[$i+1]}" = "true" ]; then
+    visibility="Private"
+    fi
+    repoName="${arr[$i]}" 
+
+    # Add all repository names to file for use in next scripts.
+    date=$(date +"%Y-%m-%d_%H-%M")
+    filename="/tmp/${date}_discovered_repositories.tmp"
+    echo "$repoName" >> $filename 
+  done
+
+# Print Discovered Repos count
+echo ""
+echo "Discovered Repository Count: $(cat $filename | wc -l)"
+echo "Repo Listing located in: $filename"
