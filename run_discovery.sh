@@ -51,7 +51,6 @@ while true; do
   echo "Discovering Repo Listing Standby: "
   echo ""
   echo $link_header
-  echo ""
 
   # Check if "rel=next" is in the "link" header
   if echo "$link_header" | grep -q 'rel="next"'; then
